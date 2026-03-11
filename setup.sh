@@ -22,6 +22,7 @@ TEST_FRAMEWORKS=""
 WORKFLOWS=""
 OUTPUT_DIR=""
 CONFIG_FILE="${SCRIPT_DIR}/agentic-config.conf"
+VERSION="$(cat "${SCRIPT_DIR}/VERSION" 2>/dev/null || echo "dev")"
 
 # --- Framework, package manager, and test framework maps ---
 # Functions return newline-separated options for a given language.
@@ -148,6 +149,7 @@ Usage: setup.sh [OPTIONS]
 Options:
   --from-config <path>   Skip questionnaire, generate from existing config file
   --output <path>        Output directory (default: current directory)
+  --version              Show version number
   --help                 Show this help message
 
 Examples:
@@ -168,6 +170,10 @@ while [[ $# -gt 0 ]]; do
     --output)
       OUTPUT_DIR="$2"
       shift 2
+      ;;
+    --version)
+      echo "agentic-workflow ${VERSION}"
+      exit 0
       ;;
     --help)
       usage
