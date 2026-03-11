@@ -72,12 +72,12 @@ replace_placeholders() {
 }
 
 # ---------------------------------------------------------------------------
-# generate_claude_md
-#   Composes CLAUDE.md at $OUTPUT_DIR/CLAUDE.md from template fragments.
+# generate_project_rules
+#   Composes project rules at $OUTPUT_DIR/.agentic-rules.md from template fragments.
 # ---------------------------------------------------------------------------
-generate_claude_md() {
+generate_project_rules() {
     local template_dir="${SCRIPT_DIR}/templates/claude-md"
-    local output_file="${OUTPUT_DIR}/CLAUDE.md"
+    local rules_file="${OUTPUT_DIR}/.agentic-rules.md"
 
     # Start with base template
     if [[ ! -f "${template_dir}/base.md" ]]; then
@@ -85,17 +85,17 @@ generate_claude_md() {
         return 1
     fi
 
-    cp "${template_dir}/base.md" "$output_file"
+    cp "${template_dir}/base.md" "$rules_file"
 
     # Append language-specific fragments
     if [[ -n "${LANGUAGES:-}" ]]; then
         local lang
         IFS=',' read -ra _langs <<< "$LANGUAGES"
         for lang in "${_langs[@]}"; do
-            lang="$(echo "$lang" | xargs)"  # trim whitespace
+            lang="$(echo "$lang" | xargs)"
             if [[ -n "$lang" && -f "${template_dir}/lang-${lang}.md" ]]; then
-                echo "" >> "$output_file"
-                cat "${template_dir}/lang-${lang}.md" >> "$output_file"
+                echo "" >> "$rules_file"
+                cat "${template_dir}/lang-${lang}.md" >> "$rules_file"
             fi
         done
     fi
@@ -107,8 +107,8 @@ generate_claude_md() {
         for fw in "${_frameworks[@]}"; do
             fw="$(echo "$fw" | xargs)"
             if [[ -n "$fw" && -f "${template_dir}/framework-${fw}.md" ]]; then
-                echo "" >> "$output_file"
-                cat "${template_dir}/framework-${fw}.md" >> "$output_file"
+                echo "" >> "$rules_file"
+                cat "${template_dir}/framework-${fw}.md" >> "$rules_file"
             fi
         done
     fi
@@ -120,13 +120,13 @@ generate_claude_md() {
         for wf in "${_workflows[@]}"; do
             wf="$(echo "$wf" | xargs)"
             if [[ "$wf" == "testing" && -f "${template_dir}/workflow-testing.md" ]]; then
-                echo "" >> "$output_file"
-                cat "${template_dir}/workflow-testing.md" >> "$output_file"
+                echo "" >> "$rules_file"
+                cat "${template_dir}/workflow-testing.md" >> "$rules_file"
             fi
         done
     fi
 
-    replace_placeholders "$output_file"
+    replace_placeholders "$rules_file"
 }
 
 # ---------------------------------------------------------------------------
@@ -259,14 +259,14 @@ generate_knowledge() {
 
 # ---------------------------------------------------------------------------
 # generate_platform_configs
-#   Copies CLAUDE.md content to platform-specific config files based on
+#   Copies project rules to platform-specific config files based on
 #   AGENT_PLATFORMS selection.
 # ---------------------------------------------------------------------------
 generate_platform_configs() {
-    local claude_md="${OUTPUT_DIR}/CLAUDE.md"
+    local rules_file="${OUTPUT_DIR}/.agentic-rules.md"
 
-    if [[ ! -f "$claude_md" ]]; then
-        print_error "CLAUDE.md not found at ${claude_md}. Run generate_claude_md first."
+    if [[ ! -f "$rules_file" ]]; then
+        print_error "Rules file not found at ${rules_file}. Run generate_project_rules first."
         return 1
     fi
 
@@ -280,27 +280,31 @@ generate_platform_configs() {
         platform="$(echo "$platform" | xargs)"
         case "$platform" in
             claude-code)
-                # CLAUDE.md is already generated, no extra action needed
+                cp "$rules_file" "${OUTPUT_DIR}/CLAUDE.md"
+                mkdir -p "${OUTPUT_DIR}/.claude"
                 ;;
             cursor)
-                cp "$claude_md" "${OUTPUT_DIR}/.cursorrules"
+                cp "$rules_file" "${OUTPUT_DIR}/.cursorrules"
                 ;;
             github-copilot)
                 mkdir -p "${OUTPUT_DIR}/.github"
-                cp "$claude_md" "${OUTPUT_DIR}/.github/copilot-instructions.md"
+                cp "$rules_file" "${OUTPUT_DIR}/.github/copilot-instructions.md"
                 ;;
             codex)
                 mkdir -p "${OUTPUT_DIR}/.codex"
-                cp "$claude_md" "${OUTPUT_DIR}/.codex/instructions.md"
+                cp "$rules_file" "${OUTPUT_DIR}/.codex/instructions.md"
                 ;;
             windsurf)
-                cp "$claude_md" "${OUTPUT_DIR}/.windsurfrules"
+                cp "$rules_file" "${OUTPUT_DIR}/.windsurfrules"
                 ;;
             *)
                 print_info "Unknown platform '${platform}', skipping."
                 ;;
         esac
     done
+
+    # Remove the intermediate rules file
+    rm -f "$rules_file"
 }
 
 # ---------------------------------------------------------------------------
@@ -421,9 +425,9 @@ with your actual project details, architecture decisions, and domain knowledge.
 
 After setup, verify that everything is working:
 
-1. **Check CLAUDE.md exists:**
+1. **Check project rules exist:**
    ```bash
-   test -f CLAUDE.md && echo "CLAUDE.md is present"
+   ls CLAUDE.md .cursorrules .windsurfrules .github/copilot-instructions.md .codex/instructions.md 2>/dev/null
    ```
 
 2. **Check skills are in place:**
@@ -465,9 +469,9 @@ generate_all() {
         print_info "Created output directory: ${OUTPUT_DIR}"
     fi
 
-    print_info "Generating CLAUDE.md..."
-    generate_claude_md
-    print_success "CLAUDE.md generated."
+    print_info "Generating project rules..."
+    generate_project_rules
+    print_success "Project rules generated."
 
     print_info "Generating skills..."
     generate_skills
