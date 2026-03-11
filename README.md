@@ -1,6 +1,6 @@
-![GitHub Release](https://img.shields.io/github/v/release/adorsys/agentic-workflow?label=latest%20release)
-![GitHub Repo stars](https://img.shields.io/github/stars/adorsys/agentic-workflow?style=flat)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/adorsys/agentic-workflow)
+![GitHub Release](https://img.shields.io/github/v/release/ADORSYS-GIS/agentic-workflow?label=latest%20release)
+![GitHub Repo stars](https://img.shields.io/github/stars/ADORSYS-GIS/agentic-workflow?style=flat)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ADORSYS-GIS/agentic-workflow)
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20WSL-blue)
 ![Shell](https://img.shields.io/badge/shell-bash%203.2%2B-green)
 
@@ -46,13 +46,13 @@ This tool generates configuration across three pillars that form a complete agen
 ### Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/adorsys/agentic-workflow/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ADORSYS-GIS/agentic-workflow/main/install.sh | bash
 ```
 
 Alternatively, clone and run directly:
 
 ```bash
-git clone https://github.com/adorsys/agentic-workflow.git
+git clone https://github.com/ADORSYS-GIS/agentic-workflow.git
 cd agentic-workflow
 bash setup.sh
 ```
@@ -158,7 +158,7 @@ Once the files are generated:
 
 ## Reporting an Issue
 
-If you believe you have discovered a defect in agentic-workflow, please open [an issue](https://github.com/adorsys/agentic-workflow/issues). Please provide a clear summary, description, and steps to reproduce.
+If you believe you have discovered a defect in agentic-workflow, please open [an issue](https://github.com/ADORSYS-GIS/agentic-workflow/issues). Please provide a clear summary, description, and steps to reproduce.
 
 
 ## Contributing
@@ -175,7 +175,7 @@ Key areas for contribution:
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/adorsys/agentic-workflow/main/install.sh | bash -s -- --uninstall
+curl -fsSL https://raw.githubusercontent.com/ADORSYS-GIS/agentic-workflow/main/install.sh | bash -s -- --uninstall
 ```
 
 Or if cloned locally:

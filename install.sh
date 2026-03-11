@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # --- Config ---
-REPO_URL="https://github.com/adorsys/agentic-workflow.git"
+REPO_URL="https://github.com/ADORSYS-GIS/agentic-workflow.git"
 INSTALL_DIR="${HOME}/.agentic-workflow"
 BIN_NAME="agentic-workflow"
 
