@@ -27,7 +27,7 @@ MCP_SERVERS=""
 TEST_FRAMEWORKS=""
 WORKFLOWS=""
 OUTPUT_DIR=""
-CONFIG_FILE="${SCRIPT_DIR}/agentic-config.conf"
+CONFIG_FILE="$(pwd)/agentic-config.conf"
 VERSION="$(cat "${SCRIPT_DIR}/VERSION" 2>/dev/null || echo "dev")"
 
 # --- Framework, package manager, and test framework maps ---
