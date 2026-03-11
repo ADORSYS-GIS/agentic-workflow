@@ -15,13 +15,16 @@ The biggest barrier to team-wide AI adoption isn't the tools  it's the **inconsi
 
 ## Supported Platforms
 
-| Platform | Status |
-|----------|--------|
+| Platform | Config files |
+|----------|-------------|
 | [Claude Code](https://claude.ai) | `CLAUDE.md`, `.claude/skills/`, `.claude/settings.json` |
 | [Cursor](https://cursor.sh) | `.cursorrules` |
 | [GitHub Copilot](https://github.com/features/copilot) | `.github/copilot-instructions.md` |
 | [Windsurf](https://codeium.com/windsurf) | `.windsurfrules` |
 | [Codex](https://openai.com/codex) | `.codex/instructions.md` |
+| [Antigravity](https://antigravity.google) | `AGENTS.md` |
+| [Roo Code](https://roocode.com) | `.roo/rules/project-rules.md` |
+| [Kilo Code](https://kilocode.ai) | `.kilocode/rules/project-rules.md` |
 
 
 ## The Three Pillars

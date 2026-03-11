@@ -297,6 +297,17 @@ generate_platform_configs() {
             windsurf)
                 cp "$rules_file" "${OUTPUT_DIR}/.windsurfrules"
                 ;;
+            antigravity)
+                cp "$rules_file" "${OUTPUT_DIR}/AGENTS.md"
+                ;;
+            roo-code)
+                mkdir -p "${OUTPUT_DIR}/.roo/rules"
+                cp "$rules_file" "${OUTPUT_DIR}/.roo/rules/project-rules.md"
+                ;;
+            kilo-code)
+                mkdir -p "${OUTPUT_DIR}/.kilocode/rules"
+                cp "$rules_file" "${OUTPUT_DIR}/.kilocode/rules/project-rules.md"
+                ;;
             *)
                 print_info "Unknown platform '${platform}', skipping."
                 ;;
@@ -347,6 +358,15 @@ EOF
                     ;;
                 windsurf)
                     echo "- **Windsurf** -- Configuration in \`.windsurfrules\`" >> "$output_file"
+                    ;;
+                antigravity)
+                    echo "- **Antigravity** -- Configuration in \`AGENTS.md\`" >> "$output_file"
+                    ;;
+                roo-code)
+                    echo "- **Roo Code** -- Configuration in \`.roo/rules/project-rules.md\`" >> "$output_file"
+                    ;;
+                kilo-code)
+                    echo "- **Kilo Code** -- Configuration in \`.kilocode/rules/project-rules.md\`" >> "$output_file"
                     ;;
                 *)
                     echo "- **${platform}**" >> "$output_file"

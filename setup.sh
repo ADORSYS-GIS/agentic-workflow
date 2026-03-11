@@ -273,7 +273,10 @@ Single repo"
 Cursor
 GitHub Copilot
 Windsurf
-Codex CLI"
+Codex CLI
+Antigravity
+Roo Code
+Kilo Code"
   prompt_multi "Select AI agent platforms your team uses:" AGENT_PLATFORMS "$PLATFORM_OPTIONS"
   AGENT_PLATFORMS="$(to_slug_list "$AGENT_PLATFORMS")"
   echo ""
