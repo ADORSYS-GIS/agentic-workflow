@@ -1,4 +1,4 @@
-# JVM MCP Server Setup 
+# JVM MCP Server Setup
 
 The simplest and most frictionless way to set up the JVM MCP Server is by using `uvx`. This approach automatically handles downloading and running the server in an isolated environment, meaning you don't need to manually clone repositories, create virtual environments, or run pip installs.
 https://github.com/xzq-xu/jvm-mcp-server
@@ -11,7 +11,7 @@ https://github.com/xzq-xu/jvm-mcp-server
 
 ## 1. Local Setup (Simplest)
 
-To configure this for an MCP client (like Roo Code or Claude Desktop), simply add the following to your MCP settings JSON file. 
+To configure this for an MCP client like Roo Code, create a `.roo/mcp.json` file in your project directory. 
 
 Using `uvx` means the tool will be fetched and executed on the fly:
 
@@ -30,7 +30,7 @@ Using `uvx` means the tool will be fetched and executed on the fly:
 
 ## 2. Remote Setup via SSH (Optional)
 
-If you need to monitor a Java application running on a remote server, you can provide the SSH credentials via environment variables directly in your MCP configuration:
+If you need to monitor a Java application running on a remote server, you can provide the SSH credentials via environment variables directly in your `.roo/mcp.json` configuration:
 
 ```json
 {
