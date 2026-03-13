@@ -113,15 +113,19 @@ generate_project_rules() {
         done
     fi
 
-    # Append testing workflow fragment if selected
+    # Append workflow-specific fragments (if any exist)
     if [[ -n "${WORKFLOWS:-}" ]]; then
         local wf
         IFS=',' read -ra _workflows <<< "$WORKFLOWS"
         for wf in "${_workflows[@]}"; do
             wf="$(echo "$wf" | xargs)"
-            if [[ "$wf" == "testing" && -f "${template_dir}/workflow-testing.md" ]]; then
+            if [[ -z "$wf" ]]; then
+                continue
+            fi
+            local wf_file="${template_dir}/workflow-${wf}.md"
+            if [[ -f "$wf_file" ]]; then
                 echo "" >> "$rules_file"
-                cat "${template_dir}/workflow-testing.md" >> "$rules_file"
+                cat "$wf_file" >> "$rules_file"
             fi
         done
     fi

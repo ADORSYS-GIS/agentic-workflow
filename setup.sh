@@ -329,7 +329,12 @@ Testing
 Documentation
 Debugging
 Security audit
-Refactoring"
+Refactoring
+CI/CD
+Infrastructure as Code
+Observability
+Incident Response
+Containerization"
   prompt_multi "Select workflows to set up skills for:" WORKFLOWS "$WF_OPTIONS"
   WORKFLOWS="$(to_slug_list "$WORKFLOWS")"
   echo ""
